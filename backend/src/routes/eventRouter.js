@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Event = require('../model/eventModel');
+const Event = require('../model/eventSchema');
 const protect = require('../middleware/auth');
 
-router.get('/', protect, async (req, res) => {
+router.get('/watchevent', protect, async (req, res) => {
   try {
     const events = await Event.find().populate('createdBy', 'name email');
     res.status(200).json(events);
@@ -12,7 +12,7 @@ router.get('/', protect, async (req, res) => {
   }
 });
 
-router.post('/', protect, async (req, res) => {
+router.post('/addEvent', protect, async (req, res) => {
   try {
     const { title, description, date, location } = req.body;
     const newEvent = new Event({

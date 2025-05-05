@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const {User} = require("../model/user");
+const {User} = require("../model/userSchema");
 
 const userAuth = async (req,res,next)=>{
     
@@ -9,7 +9,7 @@ const userAuth = async (req,res,next)=>{
     if(!token){
         throw new Error("CAN'T_GET_THE_TOKEN");
     }
-    const decodedMSG = await jwt.verify(token,"DEV@tinder$123");
+    const decodedMSG = await jwt.verify(token,"DEV@eventMANGEMENT$123");
 
     const {_id} = decodedMSG;   
     

@@ -2,7 +2,7 @@ const express = require("express");
 const { connectDB } = require("./config/db");
 const cookieParser = require("cookie-parser");
 
-const {events} = require("./routes/eventRouter");
+const {eventRouter} = require("./routes/eventRouter");
 const {userRouter} = require("./routes/userRouter");
 
 
@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 
 app.use("/", userRouter);
-app.use("/", events);
+app.use("/", eventRouter);
 
 
 connectDB()

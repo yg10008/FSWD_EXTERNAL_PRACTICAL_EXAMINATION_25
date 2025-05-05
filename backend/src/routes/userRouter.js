@@ -5,12 +5,12 @@ const bcrypt = require("bcrypt");
 
 const userRouter = express.Router();
 
-authRouter.post("/signup",async (req,res) => {  
+userRouter.post("/signup",async (req,res) => {  
 
     try{
         validateSignUpData(req);
  
-        const {name,email,password,role} = req.body;
+        const {name,email,password} = req.body;
 
         const passwordHash = await bcrypt.hash(password,10);
         console.log(passwordHash);
@@ -19,7 +19,6 @@ authRouter.post("/signup",async (req,res) => {
             name,
             password:passwordHash,  
             email,
-            role
         });
 
         await user1.save();
@@ -30,7 +29,7 @@ authRouter.post("/signup",async (req,res) => {
     }
 });
  
-authRouter.post("/login",async (req,res) => {
+userRouter.post("/login",async (req,res) => {
 
     try{
         const {email ,password} = req.body;
@@ -56,7 +55,7 @@ authRouter.post("/login",async (req,res) => {
     }
 });
 
-authRouter.post("/logout",async (req,res) => {
+userRouter.post("/logout",async (req,res) => {
     const user = req.body;
     res.cookie("token",null,{
         expires:new Date(Date.now())
